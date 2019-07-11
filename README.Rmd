@@ -1,0 +1,117 @@
+---
+output: github_document
+bibliography: bib.bib
+---
+
+<!-- README.md is generated from README.Rmd. Please edit that file -->
+
+```{r, echo = FALSE}
+knitr::opts_chunk$set(
+  collapse = TRUE,
+  comment = "#>",
+  fig.path = "README-"
+)
+```
+
+# Reproduce the Results of @gerard2019priors
+
+## Introduction
+
+This repository contains the code and instructions needed to reproduce all of
+the results from @gerard2019priors.
+
+If you find a bug, please create an
+[issue](https://github.com/dcgerard/reproduce_priors/issues).
+
+## Instructions
+    
+1. Install the appropriate R packages
+    ```{r, eval = FALSE}
+    install.packages(c("updog",
+                       "tidyverse", 
+                       "vcfR",
+                       "ggthemes",
+                       "doSNOW"))
+    ```
+    
+2. Download the data from @uitdewilligen2013next.
+
+    Place the file "journal.pone.0062355.s007.GZ" in the "data" folder.
+    
+    You can obtain this file from <https://doi.org/10.1371/journal.pone.0062355.s007>.
+    
+    This step is optional since running `make` will attempt to download all of
+    the required data using `wget`.
+    
+3. Download the data from @shirasawa2017high.
+
+    Place the file "KDRIsweetpotatoXushu18S1LG2017.vcf.gz" in the "data" folder.
+    
+    You can obtain this file from
+    <ftp://ftp.kazusa.or.jp/pub/sweetpotato/GeneticMap/KDRIsweetpotatoXushu18S1LG2017.vcf.gz>.
+    
+    This step is optional since running `make` will attempt to download all of
+    the required data using `wget`. 
+
+4. Adjust the Makefile. Change the `nc` and `rexec` variables in the Makefile
+   according to your local computing environment. For example, you would need
+   to decrease `nc` if you have fewer than 12 CPU cores. You can check the 
+   number of CPU cores you have by typing the following in R:
+   
+    ```{r, eval=FALSE}
+    parallel::detectCores()
+    ```
+
+5. Run `make`.
+    - To reproduce all of the results in the paper, simply run in the terminal:
+        ```{bash, eval=FALSE}
+        make
+        ```
+    - To reproduce just the example bad behavior under the general or uniform priors, run in the terminal:
+        ```{bash, eval=FALSE}
+        make example
+        ```
+    - To reproduce just the simulation results, run in the terminal:
+        ```{bash, eval=FALSE}
+        make sims
+        ```
+    
+6. Get coffee. Here is a list of some of my favorite places:
+
+    - Washington, DC
+        - [Colony Club](https://www.yelp.com/biz/colony-club-washington)
+        - [Grace Street Coffee](https://www.yelp.com/biz/grace-street-coffee-georgetown)
+        - [Shop Made in DC](https://www.yelp.com/biz/shop-made-in-dc-washington)
+    - Chicago
+        - [Sawada Coffee](https://www.yelp.com/biz/sawada-coffee-chicago)
+        - [Plein Air Cafe](https://www.yelp.com/biz/plein-air-cafe-and-eatery-chicago-2)
+    - Seattle
+        - [Bauhaus Ballard](https://www.yelp.com/biz/bauhaus-ballard-seattle)
+        - [Cafe Solstice](https://www.yelp.com/biz/cafe-solstice-seattle)
+    - Columbus
+        - [Yeah, Me Too](https://www.yelp.com/biz/yeah-me-too-columbus)
+        - [Stauf's Coffee Roasters](https://www.yelp.com/biz/staufs-coffee-roasters-columbus-2)
+
+## Package Versions
+
+If you are having trouble reproducing these results, check your package 
+versions. These are the ones that I used:
+
+```{r, echo = FALSE, message=FALSE, warning=FALSE, results='hide'}
+package_vec <- c("updog",
+                 "tidyverse",
+                 "vcfR",
+                 "ggthemes",
+                 "doSNOW")
+lapply(package_vec, library, character.only = TRUE)
+```
+
+```{r}
+sessionInfo()
+```
+
+Note that I've also only tried this on Ubuntu.
+
+## References
+    
+
