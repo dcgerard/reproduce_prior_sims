@@ -19,6 +19,6 @@ pl <- plot(fout_pen)
 
 ggsave(filename = "./output/figures/fix_flex.pdf",
        plot = pl,
-       height = 2,
-       width = 3,
+       height = 2.5,
+       width = 3.7,
        family = "Times")

@@ -76,7 +76,8 @@ If you find a bug, please create an
         make sims
         ```
     
-6. Get coffee. Here is a list of some of my favorite places:
+6. Get coffee. Running `make sims` should take a few hours. You should get 
+   some coffee! Here is a list of some of my favorite places:
 
     - Washington, DC
         - [Colony Club](https://www.yelp.com/biz/colony-club-washington)

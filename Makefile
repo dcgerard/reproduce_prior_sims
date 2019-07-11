@@ -57,7 +57,7 @@ simplots = ./output/figures/bias_plots/bias_Beta-binomial.pdf \
 
 
 
-all : example sims
+all : example sims normal
 
 
 #####
@@ -127,3 +127,16 @@ $(simplots) : ./code/plot_sims.R $(simout)
 
 .PHONY : sims
 sims : $(simplots) ./output/figures/possible_priors.pdf
+
+
+######
+## Code for normal recipe
+######
+
+./output/figures/norm_approx.pdf : ./code/normal_flexibility.R
+	mkdir -p $(fig_dir)
+	mkdir -p ./output/rout
+	$(rexec) $< ./output/rout/$(basename $(notdir $<)).Rout
+
+.PHONY : normal
+normal : ./output/figures/norm_approx.pdf
