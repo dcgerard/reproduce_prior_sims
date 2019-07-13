@@ -20,7 +20,9 @@ If you find a bug, please create an
                        "tidyverse", 
                        "vcfR",
                        "ggthemes",
-                       "doSNOW"))
+                       "doSNOW",
+                       "knitr",
+                       "CVXR"))
     ```
 
 2.  Download the data from Uitdewilligen et al. (2013).
@@ -74,6 +76,14 @@ If you find a bug, please create an
         
         ``` bash
         make sims
+        ```
+    
+      - To reproduce just the computational comparisons, run in the
+        terminal:
+        
+        ``` bash
+        make f1comp 
+        make unicomp
         ```
 
 6.  Get coffee. Running `make sims` should take a few hours. You should
@@ -129,42 +139,47 @@ sessionInfo()
 #> [1] stats     graphics  grDevices utils     datasets  methods   base     
 #> 
 #> other attached packages:
-#>  [1] doSNOW_1.0.16    snow_0.4-3       iterators_1.0.10 foreach_1.4.4   
-#>  [5] ggthemes_4.2.0   vcfR_1.8.0       forcats_0.4.0    stringr_1.4.0   
-#>  [9] dplyr_0.8.3      purrr_0.3.2      readr_1.3.1      tidyr_0.8.3     
-#> [13] tibble_2.1.3     ggplot2_3.2.0    tidyverse_1.2.1  updog_1.0.1     
+#>  [1] CVXR_0.99-6      knitr_1.23       doSNOW_1.0.16    snow_0.4-3      
+#>  [5] iterators_1.0.10 foreach_1.4.4    ggthemes_4.2.0   vcfR_1.8.0      
+#>  [9] forcats_0.4.0    stringr_1.4.0    dplyr_0.8.3      purrr_0.3.2     
+#> [13] readr_1.3.1      tidyr_0.8.3      tibble_2.1.3     ggplot2_3.2.0   
+#> [17] tidyverse_1.2.1  updog_1.0.1     
 #> 
 #> loaded via a namespace (and not attached):
-#>  [1] Rcpp_1.0.1                lubridate_1.7.4.9000     
-#>  [3] ape_5.3                   lattice_0.20-38          
-#>  [5] assertthat_0.2.1          zeallot_0.1.0            
-#>  [7] digest_0.6.20             R6_2.4.0                 
-#>  [9] cellranger_1.1.0          backports_1.1.4          
-#> [11] evaluate_0.14             httr_1.4.0               
-#> [13] pillar_1.4.2              rlang_0.4.0              
-#> [15] lazyeval_0.2.2            readxl_1.3.1             
-#> [17] rstudioapi_0.10           vegan_2.5-5              
-#> [19] Matrix_1.2-17             rmarkdown_1.13           
-#> [21] splines_3.6.1             pinfsc50_1.1.0           
-#> [23] munsell_0.5.0             broom_0.5.2              
-#> [25] compiler_3.6.1            modelr_0.1.4             
-#> [27] xfun_0.8                  pkgconfig_2.0.2          
-#> [29] mgcv_1.8-28               htmltools_0.3.6          
-#> [31] tidyselect_0.2.5          codetools_0.2-16         
-#> [33] viridisLite_0.3.0         permute_0.9-5            
-#> [35] crayon_1.3.4              withr_2.1.2              
-#> [37] MASS_7.3-51.4             grid_3.6.1               
-#> [39] nlme_3.1-140              jsonlite_1.6             
-#> [41] gtable_0.3.0              magrittr_1.5             
-#> [43] scales_1.0.0              cli_1.1.0                
-#> [45] stringi_1.4.3             RcppArmadillo_0.9.500.2.0
-#> [47] doParallel_1.0.14         xml2_1.2.0               
-#> [49] vctrs_0.2.0               generics_0.0.2           
-#> [51] tools_3.6.1               glue_1.3.1               
-#> [53] hms_0.5.0                 parallel_3.6.1           
-#> [55] yaml_2.2.0                colorspace_1.4-1         
-#> [57] cluster_2.1.0             rvest_0.3.4              
-#> [59] knitr_1.23                haven_2.1.1
+#>  [1] httr_1.4.0                bit64_0.9-7              
+#>  [3] jsonlite_1.6              viridisLite_0.3.0        
+#>  [5] splines_3.6.1             ECOSolveR_0.5.2          
+#>  [7] R.utils_2.9.0             modelr_0.1.4             
+#>  [9] assertthat_0.2.1          cellranger_1.1.0         
+#> [11] yaml_2.2.0                pillar_1.4.2             
+#> [13] backports_1.1.4           lattice_0.20-38          
+#> [15] glue_1.3.1                digest_0.6.20            
+#> [17] rvest_0.3.4               colorspace_1.4-1         
+#> [19] R.oo_1.22.0               htmltools_0.3.6          
+#> [21] Matrix_1.2-17             pkgconfig_2.0.2          
+#> [23] broom_0.5.2               haven_2.1.1              
+#> [25] scales_1.0.0              scs_1.2-3                
+#> [27] gmp_0.5-13.5              mgcv_1.8-28              
+#> [29] generics_0.0.2            withr_2.1.2              
+#> [31] lazyeval_0.2.2            Rmpfr_0.7-2              
+#> [33] cli_1.1.0                 magrittr_1.5             
+#> [35] crayon_1.3.4              readxl_1.3.1             
+#> [37] evaluate_0.14             R.methodsS3_1.7.1        
+#> [39] doParallel_1.0.14         nlme_3.1-140             
+#> [41] MASS_7.3-51.4             xml2_1.2.0               
+#> [43] RcppArmadillo_0.9.500.2.0 vegan_2.5-5              
+#> [45] tools_3.6.1               hms_0.5.0                
+#> [47] munsell_0.5.0             cluster_2.1.0            
+#> [49] compiler_3.6.1            rlang_0.4.0              
+#> [51] grid_3.6.1                rstudioapi_0.10          
+#> [53] rmarkdown_1.13            gtable_0.3.0             
+#> [55] codetools_0.2-16          R6_2.4.0                 
+#> [57] lubridate_1.7.4.9000      pinfsc50_1.1.0           
+#> [59] bit_1.1-14                zeallot_0.1.0            
+#> [61] permute_0.9-5             ape_5.3                  
+#> [63] stringi_1.4.3             parallel_3.6.1           
+#> [65] Rcpp_1.0.1                vctrs_0.2.0              
+#> [67] tidyselect_0.2.5          xfun_0.8
 ```
 
 Note that I’ve also only tried this on Ubuntu.

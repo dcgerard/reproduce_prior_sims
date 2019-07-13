@@ -57,7 +57,7 @@ simplots = ./output/figures/bias_plots/bias_Beta-binomial.pdf \
 
 
 
-all : example sims normal
+all : example sims normal f1comp unicomp
 
 
 #####
@@ -65,7 +65,7 @@ all : example sims normal
 #####
 
 # Download Uitdewilligen data -----------------------------------------
-./data/journal.pone.0062355.s007.GZ : 
+./data/journal.pone.0062355.s007.GZ :
 	wget --directory-prefix=data --no-clobber https://doi.org/10.1371/journal.pone.0062355.s007
 	cp ./data/journal.pone.0062355.s007 ./data/journal.pone.0062355.s007.GZ
 
@@ -140,3 +140,30 @@ sims : $(simplots) ./output/figures/possible_priors.pdf
 
 .PHONY : normal
 normal : ./output/figures/norm_approx.pdf
+
+#####
+## Code for f1comp recipe
+#####
+
+./output/figures/f1_post_means.pdf ./output/computation/f1_approaches.txt : ./code/compare_f1_ways.R
+	mkdir -p $(fig_dir)
+	mkdir -p ./output/computation
+	mkdir -p ./output/rout
+	$(rexec) $< ./output/rout/$(basename $(notdir $<)).Rout
+
+.PHONY : f1comp
+f1comp : ./output/figures/f1_post_means.pdf ./output/computation/f1_approaches.txt
+
+
+#####
+## Code for unicomp recipe
+#####
+
+./output/figures/unimodal_post_means.pdf ./output/computation/unimodal_approaches.txt : ./code/compare_unimodal_ways.R
+	mkdir -p $(fig_dir)
+	mkdir -p ./output/computation
+	mkdir -p ./output/rout
+	$(rexec) $< ./output/rout/$(basename $(notdir $<)).Rout
+
+.PHONY : unicomp
+unicomp : ./output/figures/unimodal_post_means.pdf ./output/computation/unimodal_approaches.txt 

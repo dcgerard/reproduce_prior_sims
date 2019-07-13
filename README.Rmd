@@ -31,7 +31,9 @@ If you find a bug, please create an
                        "tidyverse", 
                        "vcfR",
                        "ggthemes",
-                       "doSNOW"))
+                       "doSNOW",
+                       "knitr",
+                       "CVXR"))
     ```
     
 2. Download the data from @uitdewilligen2013next.
@@ -75,6 +77,11 @@ If you find a bug, please create an
         ```{bash, eval=FALSE}
         make sims
         ```
+    - To reproduce just the computational comparisons, run in the terminal:
+        ```{bash, eval=FALSE}
+        make f1comp 
+        make unicomp
+        ```
     
 6. Get coffee. Running `make sims` should take a few hours. You should get 
    some coffee! Here is a list of some of my favorite places:
@@ -103,7 +110,9 @@ package_vec <- c("updog",
                  "tidyverse",
                  "vcfR",
                  "ggthemes",
-                 "doSNOW")
+                 "doSNOW",
+                 "knitr",
+                 "CVXR")
 lapply(package_vec, library, character.only = TRUE)
 ```
 
