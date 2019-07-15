@@ -53,7 +53,9 @@ simplots = ./output/figures/bias_plots/bias_Beta-binomial.pdf \
            ./output/figures/pc_plots/pc_Hardy-Weinberg.pdf \
            ./output/figures/pc_plots/pc_Normal.pdf \
            ./output/figures/pc_plots/pc_Uniform.pdf \
-           ./output/figures/pc_plots/pc_Unimodal.pdf
+           ./output/figures/pc_plots/pc_Unimodal.pdf \
+	   ./output/figures/epm_summary.pdf \
+           ./output/figures/pc_summary.pdf
 
 
 
@@ -118,6 +120,7 @@ $(simout) : ./code/prior_sims.R
 	$(rexec) $< ./output/rout/$(basename $(notdir $<)).Rout
 
 $(simplots) : ./code/plot_sims.R $(simout)
+	mkdir -p $(fig_dir)
 	mkdir -p $(fig_dir)/bias_plots
 	mkdir -p $(fig_dir)/epm_plots
 	mkdir -p $(fig_dir)/od_plots

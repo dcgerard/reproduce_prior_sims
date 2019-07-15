@@ -62,7 +62,7 @@ for (index in seq_along(factor_order_vec)) {
     pl
   ggsave(filename = paste0("./output/figures/pc_plots/pc_", current_geno_dist, ".pdf"),
          plot = pl,
-         height = 8,
+         height = 7,
          width = 6,
          family = "Times")
 }
@@ -91,7 +91,7 @@ for (index in seq_along(factor_order_vec)) {
     pl
   ggsave(filename = paste0("./output/figures/bias_plots/bias_", current_geno_dist, ".pdf"),
          plot = pl,
-         height = 8,
+         height = 7,
          width = 6,
          family = "Times")
 }
@@ -121,7 +121,7 @@ for (index in seq_along(factor_order_vec)) {
     pl
   ggsave(filename = paste0("./output/figures/od_plots/od_", current_geno_dist, ".pdf"),
          plot = pl,
-         height = 8,
+         height = 7,
          width = 6,
          family = "Times")
 }
@@ -149,7 +149,56 @@ for (index in seq_along(factor_order_vec)) {
     pl
   ggsave(filename = paste0("./output/figures/epm_plots/epm_", current_geno_dist, ".pdf"),
          plot = pl,
-         height = 8,
+         height = 7,
          width = 6,
          family = "Times")
 }
+
+
+
+
+###############################
+## Plot proportion correct and empirical proportion missed for just when
+## no bias and no od
+###############################
+
+simslong %>%
+  filter(od_real == 0, bias_real == 1) %>%
+  ggplot(aes(x = Prior, y = pc, col = issame)) +
+  geom_boxplot(outlier.size = 0.5) +
+  facet_wrap(.~geno_dist) +
+  guides(color = FALSE) +
+  scale_color_colorblind() +
+  theme_bw() +
+  theme(strip.background = element_rect(fill = "white"),
+        axis.text.x = element_text(angle = 60, hjust = 1)) +
+  xlab("Assumed Prior") +
+  ylab("Proportion Correct") ->
+  pl
+
+ggsave(filename = "./output/figures/pc_summary.pdf",
+       plot = pl,
+       height = 7,
+       width = 6,
+       family = "Times")
+
+simslong %>%
+  filter(od_real == 0, bias_real == 1) %>%
+  ggplot(aes(x = Prior, y = diff, col = issame)) +
+  geom_boxplot(outlier.size = 0.5) +
+  facet_wrap(.~geno_dist) +
+  guides(color = FALSE) +
+  scale_color_colorblind() +
+  theme_bw() +
+  theme(strip.background = element_rect(fill = "white"),
+        axis.text.x = element_text(angle = 60, hjust = 1)) +
+  xlab("Assumed Prior") +
+  ylab("Proportion Missed - Estimated Proportion Missed") +
+  geom_hline(yintercept = 0, alpha = 1/2, lwd = 1, col = "blue") ->
+  pl
+
+ggsave(filename = "./output/figures/epm_summary.pdf",
+       plot = pl,
+       height = 7,
+       width = 6,
+       family = "Times")
