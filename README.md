@@ -9,7 +9,7 @@ This repository contains the code and instructions needed to reproduce
 all of the results from Gerard and Ferrão (2019).
 
 If you find a bug, please create an
-[issue](https://github.com/dcgerard/reproduce_priors/issues).
+[issue](https://github.com/dcgerard/reproduce_prior_sims/issues).
 
 ## Instructions
 
@@ -84,6 +84,13 @@ If you find a bug, please create an
         ``` bash
         make f1comp 
         make unicomp
+        ```
+    
+      - To reproduce the figure demonstrating the flexibility of the
+        class of proportional normal distributions, run in the terminal:
+        
+        ``` bash
+        make normal
         ```
 
 6.  Get coffee. Running `make sims` should take a few hours. You should
@@ -167,12 +174,12 @@ sessionInfo()
 #> [37] evaluate_0.14             R.methodsS3_1.7.1        
 #> [39] doParallel_1.0.14         nlme_3.1-140             
 #> [41] MASS_7.3-51.4             xml2_1.2.0               
-#> [43] RcppArmadillo_0.9.500.2.0 vegan_2.5-5              
+#> [43] RcppArmadillo_0.9.600.4.0 vegan_2.5-5              
 #> [45] tools_3.6.1               hms_0.5.0                
 #> [47] munsell_0.5.0             cluster_2.1.0            
 #> [49] compiler_3.6.1            rlang_0.4.0              
 #> [51] grid_3.6.1                rstudioapi_0.10          
-#> [53] rmarkdown_1.13            gtable_0.3.0             
+#> [53] rmarkdown_1.14            gtable_0.3.0             
 #> [55] codetools_0.2-16          R6_2.4.0                 
 #> [57] lubridate_1.7.4.9000      pinfsc50_1.1.0           
 #> [59] bit_1.1-14                zeallot_0.1.0            

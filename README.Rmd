@@ -21,7 +21,7 @@ This repository contains the code and instructions needed to reproduce all of
 the results from @gerard2019priors.
 
 If you find a bug, please create an
-[issue](https://github.com/dcgerard/reproduce_priors/issues).
+[issue](https://github.com/dcgerard/reproduce_prior_sims/issues).
 
 ## Instructions
     
@@ -81,6 +81,11 @@ If you find a bug, please create an
         ```{bash, eval=FALSE}
         make f1comp 
         make unicomp
+        ```
+    - To reproduce the figure demonstrating the flexibility of the class
+      of proportional normal distributions, run in the terminal:
+        ```{bash, eval=FALSE}
+        make normal
         ```
     
 6. Get coffee. Running `make sims` should take a few hours. You should get 
