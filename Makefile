@@ -66,7 +66,8 @@ simplots = ./output/figures/bias_plots/bias_Beta-binomial.pdf \
 
 
 real_plots = ./output/figures/shir_propsame.pdf \
-             ./output/figures/shir_dist.pdf
+             ./output/figures/shir_dist.pdf \
+	     ./output/figures/shir_both.pdf
 
 
 
