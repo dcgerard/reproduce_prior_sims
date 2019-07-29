@@ -30,3 +30,13 @@ dat <- data.frame(index = index,
                   size  = sizevec)
 
 write.csv(dat, "./output/example_snps/uit_snp.csv", row.names = TRUE)
+
+
+## Extract 1000 SNPs with around 50 read-depth -------------------------------
+med_size   <- apply(sizemat, 1, median, na.rm = TRUE)
+which_keep <- order((med_size - 30)^2)[seq_len(1000)]
+subref     <- refmat[which_keep, ]
+subsize    <- sizemat[which_keep, ]
+
+saveRDS(object = subref, file = "./output/example_snps/uit_sub_ref.RDS")
+saveRDS(object = subsize, file = "./output/example_snps/uit_sub_size.RDS")

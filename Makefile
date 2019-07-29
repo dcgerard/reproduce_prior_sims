@@ -20,6 +20,13 @@ fig_dir = ./output/figures
 example_snp_plots = $(fig_dir)/shir_snp.pdf \
                     $(fig_dir)/uit_snp.pdf
 
+## Uitdewilligen SNPs with low read-depth -----------------------------
+uit_snps = ./output/example_snps/uit_sub_ref.RDS \
+	   ./output/example_snps/uit_sub_size.RDS
+
+shir_snps = ./output/example_snps/shir_sub_size.RDS \
+	    ./output/example_snps/shir_sub_ref.RDS
+
 ## Output of ./code/prior_sims.R --------------------------------------
 simout = ./output/prior_sims/parvals.RDS \
          ./output/prior_sims/pilist.RDS \
@@ -58,8 +65,12 @@ simplots = ./output/figures/bias_plots/bias_Beta-binomial.pdf \
            ./output/figures/pc_summary.pdf
 
 
+real_plots = ./output/figures/shir_propsame.pdf \
+             ./output/figures/shir_dist.pdf
 
-all : example sims normal f1comp unicomp
+
+
+all : example sims normal f1comp unicomp realdata
 
 
 #####
@@ -72,7 +83,7 @@ all : example sims normal f1comp unicomp
 	cp ./data/journal.pone.0062355.s007 ./data/journal.pone.0062355.s007.GZ
 
 # Extract example SNP from Uitdewilligen data
-./output/example_snps/uit_snp.csv : ./code/extract_uit.R ./data/journal.pone.0062355.s007.GZ
+./output/example_snps/uit_snp.csv $(uit_snps) : ./code/extract_uit.R ./data/journal.pone.0062355.s007.GZ
 	mkdir -p ./output/example_snps
 	mkdir -p ./output/rout
 	$(rexec) $< ./output/rout/$(basename $(notdir $<)).Rout
@@ -82,7 +93,7 @@ all : example sims normal f1comp unicomp
 	wget --directory-prefix=data --no-clobber ftp://ftp.kazusa.or.jp/pub/sweetpotato/GeneticMap/KDRIsweetpotatoXushu18S1LG2017.vcf.gz
 
 # Extract example SNP from Shirasawa data -----------------------------
-./output/example_snps/shir_snp.csv : ./code/extract_shir.R ./data/KDRIsweetpotatoXushu18S1LG2017.vcf.gz
+./output/example_snps/shir_snp.csv $(shir_snps) : ./code/extract_shir.R ./data/KDRIsweetpotatoXushu18S1LG2017.vcf.gz
 	mkdir -p ./output/example_snps
 	mkdir -p ./output/rout
 	$(rexec) $< ./output/rout/$(basename $(notdir $<)).Rout
@@ -104,6 +115,23 @@ $(example_snp_plots) : ./code/plot_example.R ./output/example_snps/uit_snp.csv .
 .PHONY : example
 example : $(example_snp_plots) ./output/figures/fix_flex.pdf
 
+
+######
+## Code for realdata recipe
+######
+
+./output/example_snps/shir_dist.RDS : ./code/fit_shir.R $(shir_snps)
+	mkdir -p ./output/example_snps
+	mkdir -p ./output/rout
+	$(rexec) '--args nc=$(nc)' $< output/rout/$(basename $(notdir $<)).Rout
+
+$(real_plots) : ./code/plot_dis.R ./output/example_snps/shir_dist.RDS
+	mkdir -p $(fig_dir)
+	mkdir -p ./output/rout
+	$(rexec) $< ./output/rout/$(basename $(notdir $<)).Rout
+
+.PHONY : realdata
+realdata : $(real_plots)
 
 ######
 ## Code for sims recipe
@@ -170,3 +198,16 @@ f1comp : ./output/figures/f1_post_means.pdf ./output/computation/f1_approaches.t
 
 .PHONY : unicomp
 unicomp : ./output/figures/unimodal_post_means.pdf ./output/computation/unimodal_approaches.txt 
+
+
+#####
+## Clean up to reset simulations
+#####
+
+.PHONY : clean
+clean :
+	rm -rf ./output/computation
+	rm -rf ./output/example_snps
+	rm -rf ./output/figures
+	rm -rf ./output/prior_sims
+	rm -rf ./output/rout

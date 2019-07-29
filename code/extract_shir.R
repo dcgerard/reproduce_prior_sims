@@ -29,3 +29,15 @@ dat <- data.frame(index = 3002,
 write.csv(dat, "./output/example_snps/shir_snp.csv", row.names = TRUE)
 
 
+## Extract 1000 SNPs with around 100 read-depth -------------------------------
+## Choose only 30 SNPs so that priors are more important ----------------------
+size_mat   <- alt_mat + ref_mat
+med_size   <- apply(size_mat, 1, median, na.rm = TRUE)
+which_keep <- order((med_size - 100)^2)[seq_len(1000)]
+set.seed(31) ## for reproducibility
+which_ind  <- sample(seq_len(ncol(size_mat)), size = 30)
+subref     <- ref_mat[which_keep, which_ind]
+subsize    <- size_mat[which_keep, which_ind]
+
+saveRDS(object = subref, file = "./output/example_snps/shir_sub_ref.RDS")
+saveRDS(object = subsize, file = "./output/example_snps/shir_sub_size.RDS")

@@ -1,2 +1,8 @@
 *~
 analysis/
+
+output/computation/*
+output/example_snps/*
+output/figures/*
+output/prior_sims/*
+output/rout/*
