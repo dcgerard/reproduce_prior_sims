@@ -133,7 +133,7 @@ disdf %>%
                          "flex" = "General"),
          Prior2 = parse_factor(Prior2, levels = level_vec),
          stat = recode(stat,
-                       "prop" = "Hamming Distance / 30",
+                       "prop" = "Hamming Distance / 20",
                        "dist" = "Euclidean Distance")) %>%
   ggplot(aes(x = Prior1, y = value)) +
   geom_boxplot(outlier.size = 0.5) +

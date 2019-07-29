@@ -35,7 +35,7 @@ size_mat   <- alt_mat + ref_mat
 med_size   <- apply(size_mat, 1, median, na.rm = TRUE)
 which_keep <- order((med_size - 100)^2)[seq_len(1000)]
 set.seed(31) ## for reproducibility
-which_ind  <- sample(seq_len(ncol(size_mat)), size = 30)
+which_ind  <- sample(seq_len(ncol(size_mat)), size = 20)
 subref     <- ref_mat[which_keep, which_ind]
 subsize    <- size_mat[which_keep, which_ind]
 
