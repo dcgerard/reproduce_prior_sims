@@ -78,6 +78,12 @@ If you find a bug, please create an
         make sims
         ```
     
+      - To reproduce just the real data results, run in the terminal:
+        
+        ``` bash
+        make realdata
+        ```
+    
       - To reproduce just the computational comparisons, run in the
         terminal:
         
@@ -150,7 +156,7 @@ sessionInfo()
 #>  [5] iterators_1.0.10 foreach_1.4.4    ggthemes_4.2.0   vcfR_1.8.0      
 #>  [9] forcats_0.4.0    stringr_1.4.0    dplyr_0.8.3      purrr_0.3.2     
 #> [13] readr_1.3.1      tidyr_0.8.3      tibble_2.1.3     ggplot2_3.2.0   
-#> [17] tidyverse_1.2.1  updog_1.0.1     
+#> [17] tidyverse_1.2.1  updog_1.0.2     
 #> 
 #> loaded via a namespace (and not attached):
 #>  [1] httr_1.4.0                bit64_0.9-7              
@@ -185,7 +191,7 @@ sessionInfo()
 #> [59] bit_1.1-14                zeallot_0.1.0            
 #> [61] permute_0.9-5             ape_5.3                  
 #> [63] stringi_1.4.3             parallel_3.6.1           
-#> [65] Rcpp_1.0.1                vctrs_0.2.0              
+#> [65] Rcpp_1.0.2                vctrs_0.2.0              
 #> [67] tidyselect_0.2.5          xfun_0.8
 ```
 

@@ -77,6 +77,10 @@ If you find a bug, please create an
         ```{bash, eval=FALSE}
         make sims
         ```
+    - To reproduce just the real data results, run in the terminal:
+        ```{bash, eval=FALSE}
+        make realdata
+        ```
     - To reproduce just the computational comparisons, run in the terminal:
         ```{bash, eval=FALSE}
         make f1comp 
