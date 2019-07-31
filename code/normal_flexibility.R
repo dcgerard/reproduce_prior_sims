@@ -30,14 +30,21 @@ obj_fun <- function(par, pivec) {
 
 norm_mat <- matrix(NA, nrow = nrow(targetdf), ncol = ncol(targetdf))
 colnames(norm_mat) <- paste0("norm_", names(targetdf))
+muvec <- rep(NA, length = ncol(targetdf))
+sigvec <- rep(NA, length = ncol(targetdf))
 
 for (index in seq_len(ncol(targetdf))) {
   pivec <- targetdf[, index, drop = TRUE]
   muinit <- sum((0:ploidy) * pivec)
   logsdinit <- log(sqrt(sum(((0:ploidy) - muinit) ^ 2 * pivec)))
 
-  oout <- optim(par = c(muinit, logsdinit), fn = obj_fun, pivec = pivec)
-
+  oout <- optim(par = c(muinit, logsdinit),
+                fn = obj_fun,
+                pivec = pivec,
+                method = "L-BFGS-B",
+                lower = c(0, -Inf), upper = c(ploidy, Inf))
+  muvec[index] <- oout$par[1]
+  sigvec[index] <- exp(oout$par[2])
   fitted_vec <- dnorm(x = 0:ploidy, mean = oout$par[1], sd = exp(oout$par[2]), log = FALSE)
   fitted_vec <- fitted_vec / sum(fitted_vec)
   norm_mat[, index] <- fitted_vec
@@ -89,3 +96,17 @@ ggsave(filename = "./output/figures/norm_approx.pdf",
        height   = 4,
        width    = 6,
        family   = "Times")
+
+
+## print results
+data.frame(Distribution = names(targetdf), Mean = muvec, SD = sigvec) %>%
+  mutate(Distribution = str_replace(Distribution, "target_", ""),
+         Distribution = recode(Distribution,
+                               "uniform" = "Uniform",
+                               "f1" = "F1",
+                               "hw" = "Hardy-Weinberg",
+                               "bb" = "Beta-binomial")) ->
+  tabdat
+
+writeLines(knitr::kable(tabdat), con = "./output/figures/norm_flex.txt")
+
