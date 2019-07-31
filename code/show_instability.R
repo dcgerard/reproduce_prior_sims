@@ -2,8 +2,8 @@
 ## Demonstrate instability of flexible genotype distribution
 #########################
 
-suppressPackageStartupMessages(library(updog))
-suppressPackageStartupMessages(library(tidyverse))
+library(updog)
+library(tidyverse)
 uitsnp  <- read_csv(file = "./output/example_snps/uit_snp.csv")
 refvec <- uitsnp$ref
 sizevec <- uitsnp$size
@@ -13,7 +13,7 @@ fout_pen <- flexdog(refvec  = refvec,
                     ploidy  = 4,
                     model   = "flex",
                     verbose = FALSE,
-                    var_bias = 0.4^2)
+                    var_bias = 0.2^2)
 
 pl <- plot(fout_pen)
 
