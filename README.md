@@ -24,6 +24,20 @@ If you find a bug, please create an
                        "knitr",
                        "CVXR"))
     ```
+    
+    You might need to install some other software before you are able to
+    install CVXR. Before I could install CVXR in Ubuntu, I had to run in
+    the terminal:
+    
+    ``` bash
+    sudo apt-get install libmpfr-dev
+    ```
+    
+    and then run in R:
+    
+    ``` r
+    install.packages("Rmpfr")
+    ```
 
 2.  Download the data from Uitdewilligen et al. (2013).
     
@@ -152,8 +166,8 @@ sessionInfo()
 #> [1] stats     graphics  grDevices utils     datasets  methods   base     
 #> 
 #> other attached packages:
-#>  [1] CVXR_0.99-6      knitr_1.23       doSNOW_1.0.16    snow_0.4-3      
-#>  [5] iterators_1.0.10 foreach_1.4.4    ggthemes_4.2.0   vcfR_1.8.0      
+#>  [1] CVXR_0.99-6      knitr_1.23       doSNOW_1.0.18    snow_0.4-3      
+#>  [5] iterators_1.0.12 foreach_1.4.7    ggthemes_4.2.0   vcfR_1.8.0      
 #>  [9] forcats_0.4.0    stringr_1.4.0    dplyr_0.8.3      purrr_0.3.2     
 #> [13] readr_1.3.1      tidyr_0.8.3      tibble_2.1.3     ggplot2_3.2.0   
 #> [17] tidyverse_1.2.1  updog_1.0.2     
@@ -179,7 +193,7 @@ sessionInfo()
 #> [35] crayon_1.3.4              readxl_1.3.1             
 #> [37] evaluate_0.14             R.methodsS3_1.7.1        
 #> [39] doParallel_1.0.14         nlme_3.1-140             
-#> [41] MASS_7.3-51.4             xml2_1.2.0               
+#> [41] MASS_7.3-51.4             xml2_1.2.1               
 #> [43] RcppArmadillo_0.9.600.4.0 vegan_2.5-5              
 #> [45] tools_3.6.1               hms_0.5.0                
 #> [47] munsell_0.5.0             cluster_2.1.0            

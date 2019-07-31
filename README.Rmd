@@ -35,6 +35,18 @@ If you find a bug, please create an
                        "knitr",
                        "CVXR"))
     ```
+    You might need to install some other software before you are able to install
+    CVXR. Before I could install CVXR in Ubuntu, I had to run in the terminal:
+    
+    ``` bash
+    sudo apt-get install libmpfr-dev
+    ```
+    
+    and then run in R:
+    
+    ``` r
+    install.packages("Rmpfr")
+    ```
     
 2. Download the data from @uitdewilligen2013next.
 
