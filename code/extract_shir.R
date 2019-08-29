@@ -17,12 +17,12 @@ ref_mat <- ref_mat[order_vec, ]
 
 
 ## Extract SNPs ---------------------------------------------------------------
-snpnum <- 3002
+snpnum <- 3010
 altvec <- alt_mat[snpnum, ]
 refvec <- ref_mat[snpnum, ]
 totvec <- altvec + refvec
 
-dat <- data.frame(index = 3002,
+dat <- data.frame(index = snpnum,
                   ref   = refvec,
                   size  = totvec)
 
