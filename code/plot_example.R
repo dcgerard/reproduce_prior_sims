@@ -204,3 +204,29 @@ uitsnp_long %>%
 
 ggsave(filename = "./output/figures/uit_snp.pdf", plot = pl, width = 6, height = 4, family = "Times")
 
+
+temp <- uit_attdf_long
+temp$Genotype <- factor(4)
+## Black and White SNP Figure
+uitsnp_long %>%
+  ggplot(aes(x = size - ref, y = ref, shape = Genotype)) +
+  facet_wrap(. ~ prior) +
+  geom_point(size = 1.4, alpha = 3/4) +
+  theme_bw() +
+  scale_shape_discrete(drop = FALSE, na.value = 1) +
+  theme(strip.background = element_rect(fill = "white")) +
+  xlab("Alternative Count") +
+  ylab("Reference Count") +
+  xlim(0, uit_maxval) +
+  ylim(0, uit_maxval) +
+  geom_segment(data = temp,
+               mapping = aes(x = xstart,
+                             y = ystart,
+                             xend = xend,
+                             yend = yend),
+               color = "grey50",
+               lty = 2) ->
+  pl
+
+ggsave(filename = "./output/figures/uit_snp_bw.pdf", plot = pl, width = 6, height = 4, family = "Times")
+
