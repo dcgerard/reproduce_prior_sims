@@ -166,7 +166,7 @@ simslong %>%
   filter(od_real == 0, bias_real == 1) %>%
   ggplot(aes(x = Prior, y = pc, col = issame)) +
   geom_boxplot(outlier.size = 0.5) +
-  facet_wrap(.~geno_dist) +
+  facet_wrap(.~geno_dist, ncol = 4) +
   guides(color = FALSE) +
   scale_color_colorblind() +
   theme_bw() +
@@ -179,14 +179,14 @@ simslong %>%
 ggsave(filename = "./output/figures/pc_summary.pdf",
        plot = pl,
        height = 7,
-       width = 6,
+       width = 12,
        family = "Times")
 
 simslong %>%
   filter(od_real == 0, bias_real == 1) %>%
   ggplot(aes(x = Prior, y = diff, col = issame)) +
   geom_boxplot(outlier.size = 0.5) +
-  facet_wrap(.~geno_dist) +
+  facet_wrap(.~geno_dist, ncol = 4) +
   guides(color = FALSE) +
   scale_color_colorblind() +
   theme_bw() +
@@ -200,5 +200,5 @@ simslong %>%
 ggsave(filename = "./output/figures/epm_summary.pdf",
        plot = pl,
        height = 7,
-       width = 6,
+       width = 12,
        family = "Times")
