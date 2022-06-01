@@ -91,7 +91,7 @@ all : example sims normal f1comp unicomp realdata
 
 # Download the Shirasawa data -----------------------------------------
 ./data/KDRIsweetpotatoXushu18S1LG2017.vcf.gz :
-	wget --directory-prefix=data --no-clobber ftp://ftp.kazusa.or.jp/pub/sweetpotato/GeneticMap/KDRIsweetpotatoXushu18S1LG2017.vcf.gz
+	wget --directory-prefix=data --no-clobber https://github.com/dcgerard/KDRIsweetpotatoXushu18S1LG2017/raw/main/KDRIsweetpotatoXushu18S1LG2017.vcf.gz
 
 # Extract example SNP from Shirasawa data -----------------------------
 ./output/example_snps/shir_snp.csv $(shir_snps) : ./code/extract_shir.R ./data/KDRIsweetpotatoXushu18S1LG2017.vcf.gz
